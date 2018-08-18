@@ -35,12 +35,25 @@ public class TicTacToeService {
 
     public Game move(final Move move) {
         final Game game = gameDatabase.get(move.getId());
-        final String[][] board = game.getBoard();
 
+        boolean isValidMove = false;
+        final int[] validSubgames = game.getValidSubgames();
+        for(int i = 0; i < validSubgames.length; i++) {
+            if(validSubgames[i] == move.getSubgame()) {
+                isValidMove = true;
+                break;
+            }
+        }
+
+        if(!isValidMove) {
+            throw new MoveException("Cell not valid");
+        }
+
+        final String[][] board = game.getBoard();
         if("".equals(board[move.getSubgame()][move.getCell()])) {
             board[move.getSubgame()][move.getCell()] = currentPlayer.toString();
         } else {
-            throw new CellOccupiedException("Cell occupied");
+            throw new MoveException("Cell occupied");
         }
 
         if(Player.X.equals(currentPlayer)) {

@@ -1,4 +1,7 @@
 out/
 build/
-.idea
-.gradle
+
+# exclude everything
+.idea/*
+.idea/workspace.xml
+.gradle/*

@@ -26,8 +26,8 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(CellOccupiedException.class)
-    public final ResponseEntity<ExceptionResponse> handleCellOccupiedException(CellOccupiedException ex, WebRequest request) {
+    @ExceptionHandler(MoveException.class)
+    public final ResponseEntity<ExceptionResponse> handleCellOccupiedException(MoveException ex, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
                 request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
