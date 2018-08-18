@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Foo</title>
+    <style>
+      .game {
+      width: 600px;
+      height: 600px;
+      display: grid;
+      grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+      margin: 0 auto;
+      grid-gap: 5px;
+      }
+      .subgame {
+      background-color: #2c3e50;
+      color: #fff;
+      display: grid;
+      grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+      grid-gap: 5px;
+      }
+      .cell {font-family: Helvetica;
+      font-weight: bold;
+      font-size: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #34495e;
+      }
+      .cell:hover {
+      background-color: #ccc;
+      }
+      .button-container {
+      text-align: center;
+      padding: 10px;
+      }
+    </style>
+</head>
+<body>
+<div class="game">
+    <div class="subgame" data-subgame="0">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="1">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="2">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="3">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="4">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="5">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="6">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="7">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+    <div class="subgame" data-subgame="8">
+        <div class="cell" data-cell="0"></div>
+        <div class="cell" data-cell="1"></div>
+        <div class="cell" data-cell="2"></div>
+        <div class="cell" data-cell="3"></div>
+        <div class="cell" data-cell="4"></div>
+        <div class="cell" data-cell="5"></div>
+        <div class="cell" data-cell="6"></div>
+        <div class="cell" data-cell="7"></div>
+        <div class="cell" data-cell="8"></div>
+    </div>
+</div>
+</div>
+<div class="button-container">
+    <button id="new-game">New Game</button>
+</div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+var game_id;
+
+$('#new-game').click(function() {
+  $.post( "game")
+    .done(function(resp) {
+      if (resp.Error) {
+	alert(resp.Error);
+      } else {
+        game_id = resp.id;
+	display(resp);
+      }
+    });
+});
+
+$('.cell').click(function() {
+  var json = {
+    id: game_id,
+    subgame: $(this).parent().data('subgame'),
+    cell: $(this).data('cell')
+  };
+  $.post( "move", json)
+    .done(function(resp) {
+      if (resp.Error) {
+	alert(resp.Error);
+      } else {
+	display(resp);
+      }
+    });
+});
+
+function display(game) {
+  for (var i=0; i<9; i++) {
+    var subgame = $(".subgame").eq(i);
+    for (var j=0; j<9; j++) {
+      var cell = $(".cell", subgame).eq(j);
+      cell.text(game.board[i][j]);
+    }
+  }
+
+  if (game.winner !== '') {
+    alert("Game Over!\n" + game.winner + " wins!");
+  }
+}
+
+</script>
+</html>
