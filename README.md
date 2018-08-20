@@ -1,7 +1,5 @@
-# tictactoe
-Ultimate Tic-Tac-Toe game server
-
-Powered using Spring Boot
+# Ultimate Tic-Tac-Toe game
+Game Server powered using Spring Boot
 
 # To build using gradle, run the following
 - gradle clean build
