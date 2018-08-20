@@ -1,11 +1,11 @@
 # Ultimate Tic-Tac-Toe game
-Game Server powered using Spring Boot
+Game Server powered using Spring Boot and Gradle
 
 # To build using gradle, run the following
-- gradle clean build
+- ./gradlew clean build
 
 # To bring up the API
-- gradle bootRun
+- ./gradlew bootRun
 
 Once you see the below output in the console / terminal, launch the application by going to localhost:8080 in the browser
 ```
