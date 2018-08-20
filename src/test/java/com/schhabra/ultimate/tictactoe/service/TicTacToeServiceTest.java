@@ -10,13 +10,13 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TicTacToeService.class)
-public class TicTacToeServiceTest {
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {TicTacToeService.class})
+public class TicTacToeServiceTest extends BaseServiceTest {
 
     @Autowired
     private TicTacToeService service;
@@ -63,6 +63,41 @@ public class TicTacToeServiceTest {
         exception.expectMessage("Cell not valid");
 
         service.move(Move.builder().id(1L).cell(4).subgame(3).build());
+    }
+
+    @Test
+    public void shouldDetectPlayerWonGame() {
+        //construct a winning board for a given subgame
+        String[][] board = new String[9][9];
+        board[0][3] = Player.X.toString();
+        board[0][4] = Player.X.toString();
+        board[0][5] = Player.X.toString();
+        final int subgame = 0;
+        final Player currentPlayer = Player.X;
+        Game winningGame = Game.builder().board(board).build();
+
+        final boolean isWinner = service.isWinner(winningGame, currentPlayer, subgame);
+
+        assertThat(isWinner).isTrue();
+    }
+
+    @Test
+    public void shouldDetectPlayerDidNotWinGame() {
+        //construct a winning board for a given subgame
+        String[][] board = new String[9][9];
+        board[1][3] = Player.X.toString();
+        board[1][4] = Player.O.toString();
+        board[1][5] = Player.X.toString();
+        board[2][1] = Player.X.toString();
+        board[2][5] = Player.X.toString();
+        board[2][8] = Player.O.toString();
+        final int subgame = 1;
+        final Player currentPlayer = Player.O;
+        Game winningGame = Game.builder().board(board).build();
+
+        final boolean isWinner = service.isWinner(winningGame, currentPlayer, subgame);
+
+        assertThat(isWinner).isFalse();
     }
 }
 

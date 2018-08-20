@@ -3,6 +3,7 @@ package com.schhabra.ultimate.tictactoe.web;
 import com.schhabra.ultimate.tictactoe.data.Game;
 import com.schhabra.ultimate.tictactoe.data.Move;
 import com.schhabra.ultimate.tictactoe.service.TicTacToeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
 public class TicTacToeController {
 
@@ -36,6 +38,7 @@ public class TicTacToeController {
     @PostMapping("move")
     public ResponseEntity<Game> move(@RequestParam final Long id, @RequestParam final Integer subgame,
                                      @RequestParam final Integer cell) {
+        log.info("[game={}] - attempt move to subgame={}, cell={}", id, subgame, cell);
         final Game game = service.move(Move.builder().cell(cell).subgame(subgame).id(id).build());
         return ResponseEntity.ok(game);
     }
