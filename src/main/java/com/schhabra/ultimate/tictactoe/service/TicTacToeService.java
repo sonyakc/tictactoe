@@ -1,7 +1,5 @@
 package com.schhabra.ultimate.tictactoe.service;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.schhabra.ultimate.tictactoe.data.Game;
 import com.schhabra.ultimate.tictactoe.data.Move;
 import com.schhabra.ultimate.tictactoe.data.Player;
@@ -9,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -63,8 +60,11 @@ public class TicTacToeService {
         }
 
         assignPlayer();
+
+        // update game
         game.setTurn(currentPlayer);
         game.setValidSubgames(new int[]{move.getCell()});
+        gameDatabase.put(game.getId(), game);
         return game;
     }
 
@@ -86,7 +86,14 @@ public class TicTacToeService {
 
 //    List<Integer> diagonalWinCells = ImmutableList.of(0, 2, 4, 6, 8);
 
-    boolean isWinner(final Game game, final Player currentPlayer, int currentSubgame) {
+    /**
+     * Detects if the current player has won the current (sub) game
+     * @param game
+     * @param currentPlayer
+     * @param currentSubgame
+     * @return
+     */
+    boolean isSubgameWinner(final Game game, final Player currentPlayer, int currentSubgame) {
         final String[] currentGame = game.getBoard()[currentSubgame];
         String player = currentPlayer.toString();
         if ((player.equals(currentGame[0]) && player.equals(currentGame[1]) && player.equals(currentGame[2])) ||

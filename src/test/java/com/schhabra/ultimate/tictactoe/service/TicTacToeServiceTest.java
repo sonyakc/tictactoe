@@ -74,9 +74,9 @@ public class TicTacToeServiceTest extends BaseServiceTest {
         board[0][5] = Player.X.toString();
         final int subgame = 0;
         final Player currentPlayer = Player.X;
-        Game winningGame = Game.builder().board(board).build();
+        final Game winningGame = Game.builder().board(board).build();
 
-        final boolean isWinner = service.isWinner(winningGame, currentPlayer, subgame);
+        final boolean isWinner = service.isSubgameWinner(winningGame, currentPlayer, subgame);
 
         assertThat(isWinner).isTrue();
     }
@@ -84,7 +84,7 @@ public class TicTacToeServiceTest extends BaseServiceTest {
     @Test
     public void shouldDetectPlayerDidNotWinGame() {
         //construct a winning board for a given subgame
-        String[][] board = new String[9][9];
+        final String[][] board = new String[9][9];
         board[1][3] = Player.X.toString();
         board[1][4] = Player.O.toString();
         board[1][5] = Player.X.toString();
@@ -93,9 +93,9 @@ public class TicTacToeServiceTest extends BaseServiceTest {
         board[2][8] = Player.O.toString();
         final int subgame = 1;
         final Player currentPlayer = Player.O;
-        Game winningGame = Game.builder().board(board).build();
+        final Game winningGame = Game.builder().board(board).build();
 
-        final boolean isWinner = service.isWinner(winningGame, currentPlayer, subgame);
+        final boolean isWinner = service.isSubgameWinner(winningGame, currentPlayer, subgame);
 
         assertThat(isWinner).isFalse();
     }

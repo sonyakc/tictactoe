@@ -1,35 +1,80 @@
 buildscript {
 	ext {
 		springBootVersion = '2.0.4.RELEASE'
+		junitPlatformVersion = '1.0.0'
 	}
 	repositories {
 		mavenCentral()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.junit.platform:junit-platform-gradle-plugin:${junitPlatformVersion}")
 	}
 	repositories.mavenLocal()
 }
 
+plugins {
+	id 'net.ltgt.apt' version '0.15'
+}
+
+ext {
+	junitJupiterVersion  = '5.0.0'
+}
+
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-
-group = 'com.schhabra.ultimate'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 repositories {
 	mavenCentral()
 }
 
+group = 'com.schhabra.ultimate'
+version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = 1.8
+
+compileTestJava {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	options.compilerArgs += '-parameters'
+}
+
+dependencies {
+	testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+}
+
+junitPlatform {
+	filters {
+		engines {
+			include 'junit-jupiter'
+			exclude 'junit-vintage'
+		}
+		tags {
+			include 'non-functional'
+			exclude 'functional'
+		}
+		packages {
+			include 'io.github.bonigarcia'
+			exclude 'com.others', 'org.others'
+		}
+		includeClassNamePattern '.*Spec'
+		includeClassNamePatterns '.*Test', '.*Tests'
+	}
+}
+
 
 dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
-	testCompile 'org.springframework.boot:spring-boot-starter-test'
-	compileOnly 'org.projectlombok:lombok:1.18.2'
-	testCompile 'com.google.truth:truth:0.42'
 	compile 'org.springframework.boot:spring-boot-starter-aop'
 	compile 'org.aspectj:aspectjweaver:1.8.8'
 	compile 'com.google.guava:guava:23.5-jre'
+
+	compileOnly 'org.projectlombok:lombok:1.18.2'
+
+	testCompile 'com.google.truth:truth:0.42'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
